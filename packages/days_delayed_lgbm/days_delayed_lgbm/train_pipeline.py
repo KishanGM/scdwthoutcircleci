@@ -1,41 +1,36 @@
-import pathlib
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import joblib
 
 
-PACKAGE_ROOT = pathlib.Path(__file__).resolve().parent
-#TRAINED_MODEL_DIR = PACKAGE_ROOT / 'trained_models'
-DATASET_DIR = PACKAGE_ROOT / 'datasets'
-
-TESTING_DATA_FILE = DATASET_DIR / 'test.csv'
-TRAINING_DATA_FILE = DATASET_DIR / 'train.csv'
-TARGET = 'late_delivery'
+from days_delayed_lgbm import pipeline
+from days_delayed_lgbm.config import config
 
 
-FEATURES =    [  'order_id'
-                 ,'late_delivery'
-                 ,'customer_country','customer_segment'
-                 ,'samecountry_source_dest'
-                 ,'ordered_on_weekends'
-                 ,'market'
-                 ,'shipping_mode'
-                 ,'order_dt_month','store_country','order_country','order_region'
-                 ,'order_dt_weekday','cat_lowvol_lowrisk','cat_lowvol_highrisk', 'cat_highvol_lowrisk',
-                'lowvol_lowrisk', 'highvol_lowrisk',
-                'lowvol_highrisk', 'highvol_highrisk', 'order_country_logistics_performance_index'
 
-]
-
-
-def save_pipeline() -> None:
+def save_pipeline(*, pipeline_to_persist) -> None:
     """Persist the pipeline."""
-
-    pass
+    save_file_name = "days_delayed_lgbm_model.pkl"
+    save_path = config.TRAINED_MODEL_DIR / save_file_name
+    joblib.dump(pipeline_to_persist, save_path)
+    print("saved pipeline")
 
 
 def run_training() -> None:
     """Train the model."""
-
-    print('Training...')
-
+    DFTrainTest = pd.read_csv(config.DATASET_DIR / config.TRAINING_DATA_FILE)
+    #DFTrainTest = data.drop(columns = [config.ID_COL])
+    DFTrain = DFTrainTest.sample(frac =.8)
+    DFTest  = DFTrainTest[(~DFTrainTest.order_id.isin(DFTrain.order_id))]
+    X_train = DFTrain.drop(columns = [config.ID_COL,config.TARGET])
+    y_train = DFTrain[config.TARGET].values
+    X_test = DFTest.drop(columns = [config.ID_COL,config.TARGET])
+    y_test = DFTest[config.TARGET].values
+    config.Y_TRAIN = y_train
+    print(X_train.shape,",",y_train.shape,",",config.Y_TRAIN.shape )
+    pipeline.days_delayed_pipe.fit(X_train, y_train)
+    save_pipeline(pipeline_to_persist=pipeline.days_delayed_pipe)
 
 if __name__ == '__main__':
     run_training()
