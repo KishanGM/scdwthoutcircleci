@@ -4,6 +4,10 @@ from sklearn.pipeline import Pipeline
 from days_delayed_lgbm.processing import preprocessors as pp
 from days_delayed_lgbm.config import config
 
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 days_delayed_pipe = Pipeline(
     [

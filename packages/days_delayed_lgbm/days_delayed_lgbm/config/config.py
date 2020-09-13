@@ -63,7 +63,7 @@ LGB_PARAMS = {
 
 EVAL_RESULTS = {}
 
-PIPELINE_NAME = "lgbm_pipeline"
+PIPELINE_NAME = "days_delayed_lgbm"
 PIPELINE_SAVE_FILE = f"{PIPELINE_NAME}_output_v"
 
 # used for differential testing

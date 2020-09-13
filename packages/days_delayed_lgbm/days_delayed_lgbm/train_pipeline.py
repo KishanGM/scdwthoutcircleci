@@ -5,7 +5,13 @@ import joblib
 
 from days_delayed_lgbm import pipeline
 from days_delayed_lgbm.config import config
+from days_delayed_lgbm import __version__ as _version
 from days_delayed_lgbm.processing.data_management import load_dataset, save_pipeline
+
+
+import logging
+
+_logger = logging.getLogger('days_delayed_lgbm')
 
 
 
@@ -23,6 +29,7 @@ def run_training() -> None:
     print(X_train.shape,",",y_train.shape,",",config.Y_TRAIN.shape )
     pipeline.days_delayed_pipe.fit(X_train, y_train)
 
+    _logger.info(f"saving model version : {_version}")
     save_pipeline(pipeline_to_persist=pipeline.days_delayed_pipe)
 
 if __name__ == '__main__':
