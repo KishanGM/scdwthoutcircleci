@@ -1,0 +1,16 @@
+include *.txt
+include *.md
+include *.cfg
+include *.pkl
+recursive-include ./days_delayed_lgbm/*
+
+include days_delayed_lgbm/datasets/train.csv
+include days_delayed_lgbm/datasets/test.csv
+include days_delayed_lgbm/trained_models/*.pkl
+include days_delayed_lgbm/VERSION
+
+include ./requirements.txt
+exclude *.log
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
