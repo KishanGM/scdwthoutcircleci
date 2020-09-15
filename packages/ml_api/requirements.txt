@@ -2,8 +2,8 @@
 flask==1.0.2
 
 
-#-e "C:\Users\Kishan\Desktop\SCD\packages\days_delayed_lgbm"
-days_delayed_lgbm
+-e "C:\Users\Kishan\Desktop\SCD\packages\days_delayed_lgbm"
+
 
 
 # Deployment
