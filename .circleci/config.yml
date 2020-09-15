@@ -1,24 +1,24 @@
-version: 2
-jobs:
-  test_days_delayed_lgbm_model:
-    working_directory: ~/project
-    docker:
-      - image: circleci/python:3.7.2
-    steps:
-      - checkout
-      - run:
-          name: Runnning tests
-          command: |
-            virtualenv venv
-            . venv/bin/activate
-            pip install --upgrade pip
-            pip install -r packages/days_delayed_lgbm/requirements.txt
-            #chmod +x ./scripts/fetch_kaggle_dataset.sh
-            #./scripts/fetch_kaggle_dataset.sh
-            py.test -vv packages/days_delayed_lgbm/tests
-
-workflows:
-  version: 2
-  test-all:
-    jobs:
-      - test_days_delayed_lgbm_model
+# version: 2
+# jobs:
+#   test_days_delayed_lgbm_model:
+#     working_directory: ~/project
+#     docker:
+#       - image: circleci/python:3.7.2
+#     steps:
+#       - checkout
+#       - run:
+#           name: Runnning tests
+#           command: |
+#             virtualenv venv
+#             . venv/bin/activate
+#             pip install --upgrade pip
+#             pip install -r packages/days_delayed_lgbm/requirements.txt
+#             #chmod +x ./scripts/fetch_kaggle_dataset.sh
+#             #./scripts/fetch_kaggle_dataset.sh
+#             py.test -vv packages/days_delayed_lgbm/tests
+#
+# workflows:
+#   version: 2
+#   test-all:
+#     jobs:
+#       - test_days_delayed_lgbm_model
