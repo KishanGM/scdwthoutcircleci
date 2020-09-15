@@ -4,3 +4,6 @@ flask==1.0.2
 # local days_delayed_lgbm package
 # update with your local path
 -e "C:\Users\Kishan2016\Desktop\SCD\packages\days_delayed_lgbm"
+
+# Deployment
+gunicorn==19.9.0
