@@ -3,4 +3,4 @@ flask==1.0.2
 
 # local days_delayed_lgbm package
 # update with your local path
--e "C:\Users\Kishan\Desktop\SCD\packages\days_delayed_lgbm"
+-e "C:\Users\Kishan2016\Desktop\SCD\packages\days_delayed_lgbm"
