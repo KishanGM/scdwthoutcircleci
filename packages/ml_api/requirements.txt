@@ -2,7 +2,7 @@
 flask==1.0.2
 
 
--e "C:\Users\Kishan\Desktop\SCD\packages\days_delayed_lgbm"
+"C:\Users\Kishan\Desktop\SCD\packages\days_delayed_lgbm"
 
 
 
